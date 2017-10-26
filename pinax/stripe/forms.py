@@ -21,6 +21,11 @@ class PaymentMethodForm(forms.Form):
 class PlanForm(forms.Form):
     plan = forms.ModelChoiceField(queryset=Plan.objects.all())
 
+    def __init__(self, *args, **kwargs):
+        super(PlanForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'mdb-select'
+
 
 """
 The Connect forms here are designed to get users through the multi-stage
